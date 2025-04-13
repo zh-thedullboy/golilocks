@@ -1,19 +1,15 @@
 #include "goldilocks.h"
 #include <iostream>
 int main(){
-    goldilocks a(100);
-    goldilocks b = 1000;
-    goldilocks c = a * b;
-    a.print();
-    b.print();
-    c.print();
+    goldilocks a(1ull << 60);
+    goldilocks b(1ull << 61);
+    goldilocks c(1ull << 62);
+    goldilocks d(1ull << 63);
+    goldilocksFp2 n1(a, b);
+    goldilocksFp2 n2(c, d);
 
-    goldilocksFp2 d(a, b);
-    goldilocksFp2 e = d * d;
-    e.print();
-
-    goldilocksFp2 f = e - d + goldilocksFp2(2, 4) * d;
-    f.print();
+    (n1 * n2).print();
+    (n1 - n2).print();
     return 0;
 }
 
