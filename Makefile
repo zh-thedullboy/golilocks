@@ -1,47 +1,37 @@
-# 定义编译器和编译选项
-CXX = g++
-CXXFLAGS = -std=c++11 -Wall -O2
+# 变量定义
+CXX = g++                # 编译器
+CXXFLAGS = -Wall -std=c++11 -I./include  # 编译选项，-I 添加头文件路径
+SRC_DIR = src             # 源代码目录
+OBJ_DIR = obj             # 中间文件（目标文件）目录
+LIBRARY = libgoldilocks.a # 输出的静态库文件
 
-# 定义头文件路径
-INCLUDES = -I.
+# 获取所有的源文件
+SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
 
-# 定义库文件路径
-LIBS = -L. -lgold
-
-# 源文件
-SRCS = goldilocks.cpp test.cpp
-
-# 目标文件
-OBJS = $(SRCS:.cpp=.o)
-
-# 可执行文件名
-TARGET = test
+# 获取所有的目标文件（.cpp -> .o）
+OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 # 默认目标
-all: $(TARGET)
+all: $(LIBRARY)
 
-# 生成可执行文件
-$(TARGET): $(OBJS)
-	$(CXX) $(OBJS) -o $(TARGET) $(LIBS)
+# 创建静态库
+$(LIBRARY): $(OBJECTS)
+	@echo "Creating static library $@"
+	ar rcs $@ $^
 
-# 生成目标文件的规则
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+# 编译每个 .cpp 文件为 .o 文件
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(OBJ_DIR)          # 创建中间文件目录
+	$(CXX) $(CXXFLAGS) -c $< -o $@ # 编译 .cpp 文件为 .o 文件
 
-# 清理生成的文件
+# 清理中间文件和库
 clean:
-	rm -f $(OBJS) $(TARGET)
+	@echo "Cleaning up..."
+	rm -rf $(OBJ_DIR) $(LIBRARY)
 
-run:
-	./${TARGET}
+# 安装目标（可选）
+install:
+	@echo "Installing library..."
+	# 这里可以添加安装命令，例如将库文件复制到系统路径等
 
-# 安装静态库
-install: libgold.a
-	@echo "Installing static library..."
-	# 根据需要安装库文件
-
-# 自动生成依赖
-depend: $(SRCS)
-	makedepend $(SRCS)
-
-.PHONY: all clean depend install test
+.PHONY: all clean install
