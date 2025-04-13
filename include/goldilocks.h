@@ -32,36 +32,4 @@ class goldilocksFp2{
         void print() const;
 };
 
-// class goldilocksFp2 {
-//     private:
-//         goldilocks high, low;
-//         static GoldilocksField w = 7;  // ω^2 = w
-//     public:
-    
-//         goldilocksFp2 operator+(const goldilocksFp2& other) const {
-//             return goldilocksFp2(a + other.a, b + other.b);
-//         }
-    
-//         goldilocksFp2 operator-(const goldilocksFp2& other) const {
-//             return goldilocksFp2(a - other.a, b - other.b);
-//         }
-    
-//         goldilocksFp2 operator*(const goldilocksFp2& other) const {
-//             // (a + bω)(c + dω) = (ac + bd*w) + (ad + bc)ω
-//             GoldilocksField ac = a * other.a;
-//             GoldilocksField bd = b * other.b;
-//             GoldilocksField real = ac + bd * w;
-//             GoldilocksField imag = a * other.b + b * other.a;
-//             return goldilocksFp2(real, imag);
-//         }
-    
-//         void print() const {
-//             std::cout << "(";
-//             a.print();
-//             std::cout << ") + (";
-//             b.print();
-//             std::cout << ")ω";
-//         }
-//     };
-
 #endif

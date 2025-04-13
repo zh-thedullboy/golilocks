@@ -1,23 +1,21 @@
-CXX = g++
-CXXFLAGS = -Wall -std=c++11 -I./include
-SRC_DIR = src             
-OBJ_DIR = obj             
-LIBRARY = libgoldilocks.a 
+CXX := g++
+AR := ar
+CXXFLAGS := -std=c++11 -Iinclude
+LDFLAGS := 
+SRC := src/goldilocks.cpp
+OBJ := $(SRC:.cpp=.o)
+LIB := libgoldilocks.a
 
-SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
+all: $(LIB)
 
-OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+$(LIB): $(OBJ)
+	$(AR) rcs $@ $^
 
-all: $(LIBRARY)
-
-$(LIBRARY): $(OBJECTS)
-	ar rcs $@ $^
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(OBJ_DIR)
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-clean:
-	rm -rf $(OBJ_DIR) $(LIBRARY)
+test: all test.cpp
+	$(CXX) $(CXXFLAGS) test.cpp -L. -lgoldilocks -o test
 
-.PHONY: all clean
+clean:
+	rm -f $(OBJ) $(LIB) test
