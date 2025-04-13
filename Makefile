@@ -16,6 +16,8 @@ $(LIB): $(OBJ)
 
 test: all test.cpp
 	$(CXX) $(CXXFLAGS) test.cpp -L. -lgoldilocks -o test
+	@echo "\n"
+	./test
 
 clean:
 	rm -f $(OBJ) $(LIB) test

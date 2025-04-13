@@ -1,7 +1,7 @@
 #include "goldilocks.h"
 #include <iostream>
 int main(){
-    goldilocks a = 100;
+    goldilocks a(100);
     goldilocks b = 1000;
     goldilocks c = a * b;
     a.print();

@@ -20,7 +20,6 @@ class goldilocks{
 
 class goldilocksFp2{
     private:
-        // a =
         static goldilocks w; // ω^2 = w
     public:
         goldilocks a, b;
