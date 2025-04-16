@@ -10,6 +10,8 @@ class goldilocks{
     public:
         i64 val;
         goldilocks(i64 v);
+        goldilocks():val(0){}
+        bool operator==(const goldilocks& n) const;
         goldilocks  operator+(const goldilocks& n) const;
         goldilocks  operator-(const goldilocks& n) const;
         goldilocks  operator*(const goldilocks& n) const;
@@ -25,9 +27,11 @@ class goldilocksFp2{
         goldilocks a, b;
         goldilocksFp2(i64 a, i64 b);
         goldilocksFp2(goldilocks a, goldilocks b);
-        goldilocksFp2  operator+(const goldilocksFp2& n) const;
-        goldilocksFp2  operator-(const goldilocksFp2& n) const;
-        goldilocksFp2  operator*(const goldilocksFp2& n) const;
+        bool operator==(const goldilocksFp2& n) const;
+        goldilocksFp2 operator+(const goldilocksFp2& n) const;
+        goldilocksFp2 operator-(const goldilocksFp2& n) const;
+        goldilocksFp2 operator*(const goldilocksFp2& n) const;
+        goldilocksFp2 operator=(const goldilocksFp2& n);
         void print() const;
 };
 
