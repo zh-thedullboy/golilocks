@@ -13,8 +13,8 @@ class goldilocks{
         goldilocks  operator+(const goldilocks& n) const;
         goldilocks  operator-(const goldilocks& n) const;
         goldilocks  operator*(const goldilocks& n) const;
-        goldilocks  operator=(const i64 n) const;
-        goldilocks  operator=(const goldilocks n) const;
+        goldilocks  operator=(const i64 n);
+        goldilocks  operator=(const goldilocks& n);
         void print() const;
 };
 
